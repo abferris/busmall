@@ -8,15 +8,15 @@ var results=document.getElementById('results')
 var productNames=['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var votes=0;
 
-function ProductPic(name){
+function Product(name){
   this.filepath = `img/${name}.jpg`;
-  this.name=name;
-  this.chosen=0;
+  this.name = name;
+  this.chosen = 0;
   allProducts.push(this);
 }
 
 for(var i=0; i<productNames.length; i++){
-  new ProductPic(`${productNames[i]}`);
+  new Product(`${productNames[i]}`);
 }
 
 function showRandomProducts() {
@@ -24,28 +24,25 @@ function showRandomProducts() {
   var obj ={};
   for(var k=0; k<3; k++){
     obj[past[k]]=true;
-  }
-  
-  for(var i=0; i<3; i++){
+  }  
+  for(var i=0; i<past.length; i++){
     var random = Math.floor(Math.random()*allProducts.length);
     while (obj[random]){
       random = Math.floor(Math.random()*allProducts.length);
     }
     three.push(random);
     obj[random]=true; 
-      
  }
-  
 
-  productA.src= allProducts[three[0]].filepath;
-  productA.alt= allProducts[three[0]].name;
-  productA.title= allProducts[three[0]].name;
-  productB.src= allProducts[three[1]].filepath;
-  productB.alt= allProducts[three[1]].name;
-  productB.title= allProducts[three[1]].name;
-  productC.src= allProducts[three[2]].filepath;
-  productC.alt= allProducts[three[2]].name;
-  productC.title= allProducts[three[2]].name;
+  productA.src = allProducts[three[0]].filepath;
+  productA.alt = allProducts[three[0]].name;
+  productA.title = allProducts[three[0]].name;
+  productB.src = allProducts[three[1]].filepath;
+  productB.alt = allProducts[three[1]].name;
+  productB.title = allProducts[three[1]].name;
+  productC.src = allProducts[three[2]].filepath;
+  productC.alt = allProducts[three[2]].name;
+  productC.title = allProducts[three[2]].name;
   past = three;
   console.log(past);
 }
@@ -83,18 +80,18 @@ function handleClick(event){
     showRandomProducts()
   }
   console.log(votes);
-  if (votes===25){
+  if (votes === 25){
     var h2 = document.getElementById('instruction');
     h2.textContent= "Results";
-    productA.src= '';
-    productA.alt= '';
-    productA.title= '';
-    productB.src= '';
-    productB.alt= '';
-    productB.title= '';
-    productC.src= '';
-    productC.alt= '';
-    productC.title= '';
+    productA.src = '';
+    productA.alt = '';
+    productA.title = '';
+    productB.src = '';
+    productB.alt = '';
+    productB.title = '';
+    productC.src = '';
+    productC.alt = '';
+    productC.title = '';
     makeList();
     console.table(allProducts); 
     }
