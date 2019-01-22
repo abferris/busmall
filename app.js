@@ -69,7 +69,7 @@ function handleClick(event){
   // console.log('clicked')
   if(votes<25){
     var h2 = document.getElementById('instruction');
-    h2.textContent= "Click which you would be most likely purchase";
+    h2.textContent= "Click which you would most likely purchase";
     for (var i=0; i<allProducts.length; i++){
       if (event.target.title===allProducts[i].name){
       allProducts[i].chosen++;
@@ -97,3 +97,34 @@ function handleClick(event){
     }
 }
 
+var chosen = [];
+var product = [];
+
+
+//basic table stuff
+var ctx = document.getElementById('scorechart').getContext('2d');
+var scorechart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+            label: "My First dataset",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45],
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+      scales:{
+        yAxes:{
+
+        }
+      
+      }
+    }
+});
