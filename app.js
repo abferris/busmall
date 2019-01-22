@@ -62,7 +62,7 @@ productC.addEventListener('click',handleClick)
    for (var i=0; i<allProducts.length; i++){
    var ulEL = document.getElementById('results');
    var liEl = document.createElement('li');
-   liEl.textContent= `${allProducts[i].title} has ${allProducts[i].chosen} votes`;
+   liEl.textContent= `${allProducts[i].name} has ${allProducts[i].chosen} votes`;
    ulEL.appendChild(liEl);
    }
  }
@@ -83,20 +83,20 @@ function handleClick(event){
     showRandomProducts()
   }
   console.log(votes);
+  if (votes===25){
+    var h2 = document.getElementById('instruction');
+    h2.textContent= "Results";
+    productA.src= '';
+    productA.alt= '';
+    productA.title= '';
+    productB.src= '';
+    productB.alt= '';
+    productB.title= '';
+    productC.src= '';
+    productC.alt= '';
+    productC.title= '';
+    makeList();
+    console.table(allProducts); 
+    }
 }
 
-// (votes=25){
-// var h2 = document.getElementById('instruction');
-// h2.textContent= "Results";
-// productA.src= '';
-// productA.alt= '';
-// productA.title= '';
-// productB.src= '';
-// productB.alt= '';
-// productB.title= '';
-// productC.src= '';
-// productC.alt= '';
-// productC.title= '';
-// makeList();
-// console.table(allProducts); 
-// }
