@@ -10,6 +10,7 @@ header{
 }
 #logo{
   display: inline;
+  width: 200px; 
 }
 nav{
   float:right;
@@ -54,10 +55,23 @@ div img{
   display: inline-block;
   margin-left: 5vw;
   margin-top: 5vw;
-  height: 20vw;
+  height: 30vw;
   width: 20vw;
   vertical-align: middle;
+  text-align: center; 
+}
+#results{
+  position: absolute;
+  left: 25vw;
+  top:25vw;
 }
 #results li{
   color: #526474;
+}
+#allP{
+  margin-bottom: 2vw;
+}
+h3{
+  font-size: 20px;
+  margin-bottom: 15px;
 }
