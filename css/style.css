@@ -75,3 +75,24 @@ h3{
   font-size: 20px;
   margin-bottom: 15px;
 }
+.forms{
+  display: block; 
+  margin-bottom: 2vw;
+}
+.forms input{
+  position: absolute;
+  left: 20vw;
+  width: 20vw;
+}
+#comments{
+  position: absolute;
+  left: 20vw;
+  height: 6vw;
+  width: 40vw;
+  overflow-y: scroll;
+  margin-bottom: 5vw;
+}
+.commentSub{
+  display: block;
+  margin-top: 10vw;
+}
