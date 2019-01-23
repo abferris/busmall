@@ -1,4 +1,5 @@
 'use strict'
+
 var past =[.25,.25,.25];
 var allProducts = [];
 var productA= document.getElementById('productA');
@@ -45,8 +46,8 @@ function showRandomProducts() {
   productC.title = allProducts[three[2]].name;
   past = three;
   console.log(past);
-}
 
+}
 showRandomProducts();
 
 
@@ -69,7 +70,7 @@ function handleClick(event){
   // console.log('clicked')
   if(votes<25){
     var h2 = document.getElementById('instruction');
-    h2.textContent= "Click which you would be most likely purchase";
+    h2.textContent= "Click which you would most likely purchase";
     for (var i=0; i<allProducts.length; i++){
       if (event.target.title===allProducts[i].name){
       allProducts[i].chosen++;
@@ -77,7 +78,8 @@ function handleClick(event){
       // console.table(allProducts);
       }
     }
-    showRandomProducts()
+    showRandomProducts();
+    
   }
   console.log(votes);
   if (votes === 25){
@@ -94,6 +96,40 @@ function handleClick(event){
     productC.title = '';
     makeList();
     console.table(allProducts); 
+    displaychart();
     }
+}
+// bar graph stuff
+
+var productchart;
+var allChosen=[];
+function displaychart(){
+  for(var i = 0; i<allProducts.length; i++){
+    allChosen.push(allProducts[i].chosen)
+  }
+  console.log(allChosen)
+  var ctx = document.getElementById('rawr').getContext('2d');
+   productchart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'bar',
+
+      // The data for our dataset
+      data: {
+          labels: productNames,
+          datasets: [{
+              label: "Number of Selections",
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: allChosen
+          }]
+      },
+
+      // Configuration options go here
+      options: {
+        responsive: false,
+        
+      }
+  });
+  console.log("here2")
 }
 
