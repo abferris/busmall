@@ -50,6 +50,7 @@ div img{
   margin: auto;
   width:100%;
   height:auto;
+  z-index: 5;
 }
 .imgDiv{
   display: inline-block;
@@ -95,4 +96,15 @@ h3{
 .commentSub{
   display: block;
   margin-top: 10vw;
+}
+canvas{
+  /* position:absolute;
+  top:25vw;
+  left: 10vw;  */
+  height:4500;
+  width:80vw;
+  z-index: 0;
+}
+holder{
+  z-index: 2;
 }

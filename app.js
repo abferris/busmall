@@ -1,4 +1,5 @@
 'use strict'
+
 var past =[.25,.25,.25];
 var allProducts = [];
 var productA= document.getElementById('productA');
@@ -45,8 +46,8 @@ function showRandomProducts() {
   productC.title = allProducts[three[2]].name;
   past = three;
   console.log(past);
-}
 
+}
 showRandomProducts();
 
 
@@ -77,7 +78,8 @@ function handleClick(event){
       // console.table(allProducts);
       }
     }
-    showRandomProducts()
+    showRandomProducts();
+    
   }
   console.log(votes);
   if (votes === 25){
@@ -94,37 +96,40 @@ function handleClick(event){
     productC.title = '';
     makeList();
     console.table(allProducts); 
+    displaychart();
     }
 }
+// bar graph stuff
 
-var chosen = [];
-var product = [];
+var productchart;
+var allChosen=[];
+function displaychart(){
+  for(var i = 0; i<allProducts.length; i++){
+    allChosen.push(allProducts[i].chosen)
+  }
+  console.log(allChosen)
+  var ctx = document.getElementById('rawr').getContext('2d');
+   productchart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'bar',
 
+      // The data for our dataset
+      data: {
+          labels: productNames,
+          datasets: [{
+              label: "Number of Selections",
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: allChosen
+          }]
+      },
 
-//basic table stuff
-var ctx = document.getElementById('scorechart').getContext('2d');
-var scorechart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
-
-    // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    },
-
-    // Configuration options go here
-    options: {
-      scales:{
-        yAxes:{
-
-        }
-      
+      // Configuration options go here
+      options: {
+        responsive: false,
+        
       }
-    }
-});
+  });
+  console.log("here2")
+}
+
