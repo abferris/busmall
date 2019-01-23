@@ -5,10 +5,12 @@ var allProducts = [];
 var productA= document.getElementById('productA');
 var productB= document.getElementById('productB');
 var productC= document.getElementById('productC');
-var results=document.getElementById('results')
+var results=document.getElementById('results');
+var rawr=document.getElementById('rawr');
+var holder=document.getElementById('holder');
 var productNames=['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var votes=0;
-
+rawr.hidden=true;
 function Product(name){
   this.filepath = `img/${name}.jpg`;
   this.name = name;
@@ -34,7 +36,7 @@ function showRandomProducts() {
     three.push(random);
     obj[random]=true; 
  }
-
+  productA.hidden = false;
   productA.src = allProducts[three[0]].filepath;
   productA.alt = allProducts[three[0]].name;
   productA.title = allProducts[three[0]].name;
@@ -56,15 +58,6 @@ productB.addEventListener('click',handleClick)
 productC.addEventListener('click',handleClick)
 
 
- function makeList(){
-   for (var i=0; i<allProducts.length; i++){
-   var ulEL = document.getElementById('results');
-   var liEl = document.createElement('li');
-   liEl.textContent= `${allProducts[i].name} has ${allProducts[i].chosen} votes`;
-   ulEL.appendChild(liEl);
-   }
- }
-
 console.log(votes);
 function handleClick(event){
   // console.log('clicked')
@@ -85,6 +78,11 @@ function handleClick(event){
   if (votes === 25){
     var h2 = document.getElementById('instruction');
     h2.textContent= "Results";
+    productA.hidden=true;
+    productB.hidden=true;
+    productC.hidden=true;
+    holder.hidden=true;
+    rawr.hidden=false;
     productA.src = '';
     productA.alt = '';
     productA.title = '';
@@ -94,7 +92,6 @@ function handleClick(event){
     productC.src = '';
     productC.alt = '';
     productC.title = '';
-    makeList();
     console.table(allProducts); 
     displaychart();
     }
@@ -123,7 +120,6 @@ function displaychart(){
               data: allChosen
           }]
       },
-
       // Configuration options go here
       options: {
         responsive: false,

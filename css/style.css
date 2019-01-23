@@ -101,8 +101,8 @@ canvas{
   /* position:absolute;
   top:25vw;
   left: 10vw;  */
-  height:4500;
-  width:80vw;
+  height:270px;
+  width:900px;
   z-index: 0;
 }
 holder{
