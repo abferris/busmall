@@ -1,27 +1,54 @@
 'use strict'
+if (localStorage.allChosenLoc){
+  console.log('previous storage')
+  var retrievedNames=localStorage.productNamesLoc;
+  var retrievedVotes=localStorage.allChosenLoc;
+  var productNames=JSON.parse(retrievedNames);
+  var allChosen=JSON.parse(retrievedVotes);
+  localStorage.clear
+}
+else{ 
+  console.log('new page')
+  var productNames=['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+  var allChosen=[];
+  for (i=0;i<productNames.length;i++){
+    allChosen.push(0);
+  }
+}
+//data
 
 var past =[.25,.25,.25];
 var allProducts = [];
+var productchart;
+var votes=0;
+prodTable.hidden=true;
+
 var productA= document.getElementById('productA');
 var productB= document.getElementById('productB');
 var productC= document.getElementById('productC');
 var results=document.getElementById('results');
-var rawr=document.getElementById('rawr');
+var prodTable=document.getElementById('prodTable');
 var holder=document.getElementById('holder');
-var productNames=['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-var votes=0;
-rawr.hidden=true;
-function Product(name){
+
+
+
+
+
+//Dom Node
+function Product(name, a){
   this.filepath = `img/${name}.jpg`;
   this.name = name;
-  this.chosen = 0;
-  allProducts.push(this);
+  this.chosen = a;
+  allProducts.push(this); 
 }
-
 for(var i=0; i<productNames.length; i++){
-  new Product(`${productNames[i]}`);
+  new Product(`${productNames[i]}`,allChosen[i]);
 }
 
+//constructor function
+
+
+//make the random products
 function showRandomProducts() {
   var three = [];
   var obj ={};
@@ -47,65 +74,11 @@ function showRandomProducts() {
   productC.alt = allProducts[three[2]].name;
   productC.title = allProducts[three[2]].name;
   past = three;
-  console.log(past);
 
-}
-showRandomProducts();
-
-
-productA.addEventListener('click',handleClick)
-productB.addEventListener('click',handleClick)
-productC.addEventListener('click',handleClick)
-
-
-console.log(votes);
-function handleClick(event){
-  // console.log('clicked')
-  if(votes<25){
-    var h2 = document.getElementById('instruction');
-    h2.textContent= "Click which you would most likely purchase";
-    for (var i=0; i<allProducts.length; i++){
-      if (event.target.title===allProducts[i].name){
-      allProducts[i].chosen++;
-      votes++;
-      // console.table(allProducts);
-      }
-    }
-    showRandomProducts();
-    
-  }
-  console.log(votes);
-  if (votes === 25){
-    var h2 = document.getElementById('instruction');
-    h2.textContent= "Results";
-    productA.hidden=true;
-    productB.hidden=true;
-    productC.hidden=true;
-    holder.hidden=true;
-    rawr.hidden=false;
-    productA.src = '';
-    productA.alt = '';
-    productA.title = '';
-    productB.src = '';
-    productB.alt = '';
-    productB.title = '';
-    productC.src = '';
-    productC.alt = '';
-    productC.title = '';
-    console.table(allProducts); 
-    displaychart();
-    }
 }
 // bar graph stuff
-
-var productchart;
-var allChosen=[];
 function displaychart(){
-  for(var i = 0; i<allProducts.length; i++){
-    allChosen.push(allProducts[i].chosen)
-  }
-  console.log(allChosen)
-  var ctx = document.getElementById('rawr').getContext('2d');
+  var ctx = document.getElementById('prodTable').getContext('2d');
    productchart = new Chart(ctx, {
       // The type of chart we want to create
       type: 'bar',
@@ -123,9 +96,77 @@ function displaychart(){
       // Configuration options go here
       options: {
         responsive: false,
-        
+        scales: {
+          yAxes:[{
+            ticks: {
+              fontsize: 10,
+              setpsize: 1,
+              beginAtZero:true
+            }
+
+          }],
+          xAxes: [{
+             ticks:{
+               fontsize: 10,
+               autoSkip: false
+             }
+
+          }]
+        }
       }
-  });
-  console.log("here2")
+    });
+}
+//handing on clicks
+function handleClick(event){
+  if(votes<25){
+    var h2 = document.getElementById('instruction');
+    h2.textContent= "Click which you would most likely purchase";
+    for (var i=0; i<allProducts.length; i++){
+      if (event.target.title===allProducts[i].name){
+      allProducts[i].chosen++;
+      votes++;
+      }
+    }
+    allChosen=[];
+    
+    for(var i = 0; i<allProducts.length; i++){
+      allChosen.push(allProducts[i].chosen);
+    }
+    var productNamesStringified = JSON.stringify(productNames);
+    localStorage.productNamesLoc=productNamesStringified;
+    var allChosenStringified = JSON.stringify(allChosen);
+    localStorage.allChosenLoc=allChosenStringified;
+
+    showRandomProducts();
+    
+  }
+  if (votes === 25){
+    var h2 = document.getElementById('instruction');
+    h2.textContent= "Results";
+    productA.hidden=true;
+    productB.hidden=true;
+    productC.hidden=true;
+    holder.hidden=true;
+    prodTable.hidden=false;
+    productA.src = '';
+    productA.alt = '';
+    productA.title = '';
+    productB.src = '';
+    productB.alt = '';
+    productB.title = '';
+    productC.src = '';
+    productC.alt = '';
+    productC.title = '';
+    console.table(allProducts); 
+    displaychart();
+    }
 }
 
+
+
+showRandomProducts();
+
+//event listeners
+productA.addEventListener('click',handleClick)
+productB.addEventListener('click',handleClick)
+productC.addEventListener('click',handleClick)

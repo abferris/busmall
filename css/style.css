@@ -1,16 +1,19 @@
+/* overarching */
 body{
   background: #999999;
   color: #526474;
   margin: 3vw 10vw 3vw 10vw ;
 }
+
+/* top of the page */
 header{
   border-bottom: solid #000000;
   padding-bottom: 15px;
   margin-bottom:15px
 }
 #logo{
-  display: inline;
-  width: 200px; 
+  height:100px;
+  width: auto;
 }
 nav{
   float:right;
@@ -27,16 +30,17 @@ h1{
   width:40vw;
   left: 30vw;
 }
+/* meat of the page */
 h2{
   font-size: 30px;
   text-align:center;
-  margin-top:4vw;
+  margin-top:2vw;
 }
 p{
   width: 60vw;
   margin-left: 10vw;  
   font-size:20px;
-  margin-bottom: 5vw;
+  margin-bottom: 2vw;
 }
 button{
   width: 30vw;
@@ -45,6 +49,7 @@ button{
   align-content: center;
   border-radius: 15px;
 }
+
 div img{
   display: block;
   margin: auto;
@@ -61,6 +66,7 @@ div img{
   vertical-align: middle;
   text-align: center; 
 }
+
 #results{
   position: absolute;
   left: 25vw;
@@ -101,8 +107,8 @@ canvas{
   /* position:absolute;
   top:25vw;
   left: 10vw;  */
-  height:270px;
-  width:900px;
+  height:20vw;
+  width:80vw;
   z-index: 0;
 }
 holder{
