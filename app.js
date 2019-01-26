@@ -21,7 +21,7 @@ var past =[.25,.25,.25];
 var allProducts = [];
 var productchart;
 var votes=0;
-prodTable.hidden=true;
+
 
 var productA= document.getElementById('productA');
 var productB= document.getElementById('productB');
@@ -29,7 +29,7 @@ var productC= document.getElementById('productC');
 var results=document.getElementById('results');
 var prodTable=document.getElementById('prodTable');
 var holder=document.getElementById('holder');
-
+prodTable.hidden = true;
 
 
 
